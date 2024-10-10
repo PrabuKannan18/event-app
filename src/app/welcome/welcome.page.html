@@ -1,0 +1,19 @@
+<ion-content [fullscreen]="true" color="dark">
+  <swiper-container
+  [modules]="swiperModules"
+  [pagination]="{clickable: true}"
+  [keyboard]="true">
+      @for (item of onboardingScreens; track $index) {       
+      <swiper-slide>
+        <div [ngStyle]="{'background-image' : 'url(../../assets/onboarding_screens/' + item.image + ')'}"></div>
+      </swiper-slide>
+      }
+  </swiper-container>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" [strong]="true" shape="round" size="large" routerLink="/home">
+      <ion-text>Get Started</ion-text>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
