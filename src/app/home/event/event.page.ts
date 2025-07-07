@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -33,7 +33,8 @@ import { Event } from 'src/app/interfaces/event.interface';
     IonToolbar,
     IonHeader,
     IonContent,
-    DatePipe
+    DatePipe,
+    RouterLink
   ],
 })
 export class EventPage implements OnInit {

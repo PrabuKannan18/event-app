@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Buy Tickets</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="event-header">
+    <img [src]="event?.image" alt="Event Image" class="event-image">
+    <h1>{{event?.name}}</h1>
+    <div class="event-details">
+      <p><ion-icon name="calendar-outline"></ion-icon> {{event?.date}}</p>
+      <p><ion-icon name="location-outline"></ion-icon> {{event?.location}}</p>
+    </div>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ticket Options</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-radio-group [value]="selectedTicketType" (ionChange)="selectedTicketType = $event.detail.value">
+          <ion-item>
+            <ion-radio slot="start" value="general"></ion-radio>
+            <ion-label>
+              <h2>General Admission</h2>
+              <p>Standard seating</p>
+            </ion-label>
+            <ion-note slot="end">${{ticketPrices.general}}</ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-radio slot="start" value="vip"></ion-radio>
+            <ion-label>
+              <h2>VIP Admission</h2>
+              <p>Premium seating + Meet & Greet</p>
+            </ion-label>
+            <ion-note slot="end">${{ticketPrices.vip}}</ion-note>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Select Quantity</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="quantity-selector">
+        <ion-button fill="clear" (click)="decreaseQuantity()" [disabled]="quantity <= 1">
+          <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
+        </ion-button>
+        <ion-text>{{quantity}}</ion-text>
+        <ion-button fill="clear" (click)="increaseQuantity()" [disabled]="quantity >= seatsAvailable">
+          <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <ion-text color="medium">{{seatsAvailable}} seats available</ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Order Summary</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label>{{quantity}} x {{selectedTicketType === 'general' ? 'General' : 'VIP'}} Admission</ion-label>
+          <ion-note slot="end">${{getSubtotal()}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Service Fee</ion-label>
+          <ion-note slot="end">${{serviceFee}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Total</strong></ion-label>
+          <ion-note slot="end"><strong>${{getTotal()}}</strong></ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" shape="round" (click)="purchaseTickets()" class="purchase-button">
+    Confirm Purchase
+  </ion-button>
+</ion-content>

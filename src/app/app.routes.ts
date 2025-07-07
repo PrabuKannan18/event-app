@@ -1,17 +1,22 @@
 import { Routes } from '@angular/router';
+import { HomePage } from './home/home.page';
 
 export const routes: Routes = [
   {
     path: 'home',
     children: [
       {
-        path:'',
-        loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+        path: '',
+        component: HomePage
       },
       {
         path: 'events/:id',
-        loadComponent: () => import('./home/event/event.page').then( m => m.EventPage)
+        loadComponent: () => import('./home/event/event.page').then(m => m.EventPage)
       },
+      {
+        path: 'events/:id/buy-tickets',
+        loadComponent: () => import('./home/buy-ticktes/buy-ticktes.component').then(m => m.BuyTicketsComponent)
+      }
     ]
   },
   {
@@ -21,7 +26,7 @@ export const routes: Routes = [
   },
   {
     path: 'welcome',
-    loadComponent: () => import('./welcome/welcome.page').then( m => m.WelcomePage)
-  },
-  
+    loadComponent: () => import('./welcome/welcome.page').then(m => m.WelcomePage)
+  }
+
 ];
